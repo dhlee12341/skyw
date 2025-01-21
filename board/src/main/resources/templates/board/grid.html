@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>그리드 목록</title>
+</head>
+<body>
+    <h1>그리드 목록</h1>
+    <!-- <a href="/board/insert">GRID 등록</a> -->
+    <table border="1">
+        <tr>
+            <th width="100">사용자ID</th>
+            <th width="100">이름</th>
+            <th width="100">이메일</th>
+            <th width="150">나이</th>
+            <th width="100">생성일</th>
+            <th width="150">활성화 여부</th>
+            <th widht="250">잔액</th>
+            <th widht="250">BIO</th>
+            <th widht="250">생년월일</th>
+            <th widht="250">IP 주소</th>
+        </tr>
+        <th:block th:each="board : ${griddList}">
+            <tr>
+                <td align="center" th:text="${griddList.id}"></td>
+                <td align="center" th:text="${griddList.name}"></td>
+                <td align="center" th:text="${griddList.email}"></td>
+                <td align="center" th:text="${griddList.iage}"></td>
+                <td align="center" th:text="${griddList.createdat}"></td>
+                <td align="center" th:text="${griddList.isactive}"></td>
+                <td align="center" th:text="${griddList.balance}"></td>
+                <td align="center" th:text="${griddList.bio}"></td>
+                <!-- 
+                    유틸리티객체.메소드()
+                    #dates.format( 날짜객체명, '날짜포맷' ) 
+                    - #dates.format( board.regDate, 'yyyy-MM-dd HH:mm:ss' )
+                -->
+                <td align="center">
+                    <span th:text="${ #dates.format( griddList.birthdate, 'yyyy-MM-dd' ) }"></span>
+                </td>
+                <td align="center" th:text="${griddList.ipaddress}"></td>
+            </tr>
+        </th:block>
+    </table>
+
+    
+</body>
+</html>

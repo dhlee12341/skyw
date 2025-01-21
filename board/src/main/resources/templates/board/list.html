@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 목록</title>
+</head>
+<body>
+    <h1>사용자 목록</h1>
+    <a href="/board/insert">사용자 등록</a>
+    <table border="1">
+        <tr>
+            <th width="100">사용자ID</th>
+            <th width="100">비밀번호</th>
+            <th width="150">최종접속일시</th>
+            <th width="100">사용여부</th>
+            <th width="150">입력일</th>
+            <th widht="250">숫자형</th>
+        </tr>
+        <th:block th:each="board : ${boardList}">
+            <tr>
+                <td align="center" th:text="${board.사용자ID}"></td>
+                <td align="center" th:text="${board.비밀번호}"></td>
+                <td align="center" th:text="${board.최종접속일시}"></td>
+                <td align="center" th:text="${board.사용여부}"></td>
+                <!-- 
+                    유틸리티객체.메소드()
+                    #dates.format( 날짜객체명, '날짜포맷' ) 
+                    - #dates.format( board.regDate, 'yyyy-MM-dd HH:mm:ss' )
+                -->
+                <td align="center">
+                    <span th:text="${ #dates.format( board.입력일, 'yyyy-MM-dd' ) }"></span>
+                </td>
+                <td align="center" th:text="${board.숫자형}"></td>
+            </tr>
+        </th:block>
+    </table>
+
+    
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 등록</title>
+</head>
+<script>
+    window.onload = function() {
+      const today = new Date();
+      const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+      document.getElementById("입력일").value = formattedDate;
+    };
+  </script>
+<body>
+    <h1>사용자 등록</h1>
+
+    <form action="/board/insert" method="post">
+        <div>
+            <label for="사용자ID">사용자ID:</label>
+            <input type="text" name="사용자ID" id="사용자ID" required>
+        </div>
+        <div>
+            <label for="비밀번호">비밀번호:</label>
+            <input type="password" name="비밀번호" id="비밀번호" required>
+        </div>
+        <div>
+            <label for="숫자형">숫자형:</label>
+            <input type="text" name="숫자형" id="숫자형">
+        </div>
+        <input type="hidden" name="최종접속일시" value="">
+        <div>
+            <label for="사용여부">사용 여부:</label>
+            <select name="사용여부" id="사용여부">
+                <option value="Y">사용</option>
+                <option value="N">미사용</option>
+            </select>
+        </div>
+        <input type="hidden" name="입력일" id="입력일">  
+
+        <input type="submit" value="등록">
+    </form>
+</body>
+</html>

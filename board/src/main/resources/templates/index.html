@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테스트</title>
+</head>
+<body>
+    <h1>React - Spring Boot - PostgreSQL 연동 테스트</h1>
+    <ul>
+        <h3>1. 설치파일</h3>
+        <li>개발툴 : VSCodeUserSetup-x64-1.96.4.exe <a href="https://code.visualstudio.com/download">다운로드링크</a></li>
+        <li>DB : pgadmin4-8.14-x64.exe <a href="https://www.pgadmin.org/download/pgadmin-4-windows/">다운로드링크</a></li>
+        <li>nodejs : node-v22.13.0-x64.msi <a href="https://nodejs.org/ko/download">다운로드링크</a></li>
+        <li>jdk : jdk-17.0.12_windows-x64_bin.msi <a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html">다운로드링크</a></li>
+        <li>Git : Git-2.47.1.2-64-bit.exe <a href="https://git-scm.com/downloads/win">다운로드링크</a></li>
+        
+        <br>
+
+        <h3>2. Spring Boot 3.2.2</h3>
+        <li style="font-size: 20px; font-weight: bold;">- 설치순서</li>
+        <li>1. 명령팔레트</li>
+        <li>2. Spring Initializr Create a Gradle Project</li>
+        <li>3. 3.3.7</li>
+        <li>4. Java</li>
+        <li>5. com.skyw</li>
+        <li>6. erp</li>
+        <li>7. War  -->  Jar로 수정하기!!</li>
+        <li>8. 17</li>
+        <li>9. Spring Boot DevTools, Lombok, Spring-Web, Thymeleaf, PostgreSQL Driver, Mybatis Framework</li>
+        <!-- <li style="font-size: 20px; font-weight: bold;">- 서비스 코딩</li>
+        <li>1. src/main/java/com/skyw/board/cotroller/BoardController.java</li>
+        <li>2. src/main/java/com/skyw/board/service/BoardService.java</li>
+        <li>3. src/main/java/com/skyw/board/service/BoardServiceImpl.java</li>
+        <li>4. src/main/java/com/skyw/board/mapper/BoardMapper.java</li>
+        <li>5. src/main/java/com/skyw/board/dto/Board.java, Grid.java</li>
+        <li>5. src/main/resource/templates/index.html</li>
+        <li>5. src/main/resource/templates/board/list.html, grid.html, insert.html ... </li> -->
+        <br>
+
+        <h3>3. PostgreSQL</h3>
+        <li>src/main/resource/application.properties -> PostgreSQL DB 연결 설정</li>
+        <li>src/main/resource/com/skyw/board/mapper/BoardMapper.xml -> DB 데이터 CRUD 쿼리 작성</li>
+        <li>src/main/java/com/skyw/board/dto/Board.java -> DTO DB데이터를 담을 구조체 작성</li>
+        <br>
+
+        <h3>4. React</h3>
+        <li>터미널 : node -v   --> node.js 버전확인</li>
+        <li>터미널 : npx create-react-app [프로젝트이름]  --> react 프로젝트 생성</li>
+        <li>터미널 : npm install axios   --> axios 설치</li>
+        <li>터미널 : npm install bootstrap react-bootstrap   --> react-bootstrap 설치</li>
+        <li>터미널 : npm install react-router-dom   --> react-router-dom 설치</li>
+        <li>터미널 : npm install web-vitals   --> web-vitals 설치</li>
+        <li>터미널 : npm cache clean --force    --> 리액트 오류시 : 캐시초기화</li>
+        <li>터미널 : netstat -ano | findstr 8080   --> 스프링부트 오류시 : 포트확인</li>
+        <li>터미널 : netstat -ano | findstr 3000   --> 리액트 오류시 : 포트확인</li>
+        <li>터미널 : taskkill /F /PID 프로세스ID   --> 포트사용중인 경우 Kill</li>
+        <li>터미널 : npm start   --> React 실행</li>
+        <br>
+
+        <h3>5. mybatis</h3>
+        <li>src/main/resource/mybatis-config.xml 작성</li>
+        <li>src/main/resource/application.properties -> Mybatis 설정</li>
+        <br>
+
+        <h3>6. 그 외</h3>
+        <li>크롬 확장프로그램 -> 다운로드:크롬 웹 스토어</li>
+        <li>
+            LiveReload : html 수정시 웹페이지에서 자동으로 새로고침 해주는 기능
+            <a href="https://chromewebstore.google.com/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=ko">다운로드링크</a>
+        </li>
+        <br>
+
+    </ul>
+
+    <ul>
+        <li><a href="/board/list">전체 사용자 목록</a></li>
+        <li><a href="/board/grid">전체 그리드 목록</a></li>
+
+        <!-- <li><a href="/board/login">로그인</a></li> -->
+        <!-- <li><a href="/board/join">회원가입</a></li> -->
+    </ul>
+</body>
+</html>
