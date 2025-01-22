@@ -31,7 +31,7 @@
              , birth_date::date as birthdate
              , ip_address::text as ipaddress
           FROM test.test
-         WHERE iage = 20
+         WHERE iage = 39
          ORDER BY id
     </select>
 

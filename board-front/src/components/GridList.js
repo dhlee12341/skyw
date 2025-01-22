@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import DataGrid, { Column, Paging, Pager } from 'devextreme-react/data-grid';
+import 'devextreme/dist/css/dx.light.css';
 
 function GridList() {
   const [grids, setGrids] = useState([]);
@@ -21,10 +23,8 @@ function GridList() {
     }
   };
 
-  // 날짜 포맷팅 함수
-  const formatDate = (dateString) => {
-    if (!dateString) return '';
-    return new Date(dateString).toLocaleString('ko-KR', {
+  const formatDate = (rowData) => {
+    return new Date(rowData.createdAt).toLocaleString('ko-KR', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
@@ -34,13 +34,20 @@ function GridList() {
     });
   };
 
-  // 생년월일 포맷팅 함수
-  const formatBirthDate = (dateString) => {
-    if (!dateString) return '';
-    return new Date(dateString).toLocaleDateString('ko-KR', {
+  const formatBirthDate = (rowData) => {
+    return new Date(rowData.birthDate).toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit'
+    });
+  };
+
+  const formatBalance = (rowData) => {
+    return rowData.balance?.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
     });
   };
 
@@ -48,49 +55,49 @@ function GridList() {
     <div style={{ margin: '20px' }}>
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       <h2>Grid 목록</h2>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr>
-            <th style={{ border: '1px solid black', padding: '8px' }}>No</th>
-            <th style={{ border: '1px solid black', padding: '8px' }}>ID</th>
-            <th style={{ border: '1px solid black', padding: '8px' }}>이름</th>
-            <th style={{ border: '1px solid black', padding: '8px' }}>이메일</th>
-            <th style={{ border: '1px solid black', padding: '8px' }}>나이</th>
-            <th style={{ border: '1px solid black', padding: '8px' }}>생성일</th>
-            <th style={{ border: '1px solid black', padding: '8px' }}>활성화</th>
-            <th style={{ border: '1px solid black', padding: '8px' }}>잔액</th>
-            <th style={{ border: '1px solid black', padding: '8px' }}>생년월일</th>
-            <th style={{ border: '1px solid black', padding: '8px' }}>IP 주소</th>
-          </tr>
-        </thead>
-        <tbody>
-          {grids.map((grid, index) => (
-            <tr key={grid.id}>
-              <td style={{ border: '1px solid black', padding: '8px', textAlign: 'center' }}>{index + 1}</td>
-              <td style={{ border: '1px solid black', padding: '8px', textAlign: 'center' }}>{grid.id}</td>
-              <td style={{ border: '1px solid black', padding: '8px' }}>{grid.name}</td>
-              <td style={{ border: '1px solid black', padding: '8px' }}>{grid.email}</td>
-              <td style={{ border: '1px solid black', padding: '8px', textAlign: 'center' }}>{grid.iage}</td>
-              <td style={{ border: '1px solid black', padding: '8px' }}>
-                {formatDate(grid.createdAt)}
-              </td>
-              <td style={{ border: '1px solid black', padding: '8px', textAlign: 'center' }}>
-                {grid.isActive ? '예' : '아니오'}
-              </td>
-              {/* <td style={{ border: '1px solid black', padding: '8px' }}>
-                {grid.balance?.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })}
-              </td> */}
-              <td style={{ border: '1px solid black', padding: '8px', textAlign: 'right' }}>
-                {grid.balance?.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-              </td>
-              <td style={{ border: '1px solid black', padding: '8px', textAlign: 'center' }}>
-                {formatBirthDate(grid.birthDate)}
-              </td>
-              <td style={{ border: '1px solid black', padding: '8px' }}>{grid.ipAddress}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <DataGrid
+        dataSource={grids}
+        showBorders={true}
+        columnAutoWidth={true}
+        allowColumnReordering={true}
+        allowColumnResizing={true}
+      >
+        <Paging defaultPageSize={10} />
+        <Pager
+          showPageSizeSelector={true}
+          allowedPageSizes={[5, 10, 20]}
+          showInfo={true}
+        />
+        
+        <Column dataField="id" caption="ID" alignment="center" />
+        <Column dataField="name" caption="이름" />
+        <Column dataField="email" caption="이메일" />
+        <Column dataField="iage" caption="나이" alignment="center" />
+        <Column
+          dataField="createdAt"
+          caption="생성일"
+          calculateCellValue={formatDate}
+        />
+        <Column
+          dataField="isActive"
+          caption="활성화"
+          alignment="center"
+          calculateCellValue={(rowData) => rowData.isActive ? '예' : '아니오'}
+        />
+        <Column
+          dataField="balance"
+          caption="잔액"
+          alignment="right"
+          calculateCellValue={formatBalance}
+        />
+        <Column
+          dataField="birthDate"
+          caption="생년월일"
+          alignment="center"
+          calculateCellValue={formatBirthDate}
+        />
+        <Column dataField="ipAddress" caption="IP 주소" />
+      </DataGrid>
     </div>
   );
 }
